@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:02:01 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/26 14:46:48 by vrobin           ###   ########.fr       */
+/*   Created: 2018/11/26 15:30:17 by vrobin            #+#    #+#             */
+/*   Updated: 2018/11/27 14:28:08 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdio.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	unsigned int	i;
-	unsigned int	j;
-	char			*join;
+	t_list *lstnew;
 
-	if (s1 == NULL || s2 == NULL)
+	if (!(lstnew = (t_list*)malloc(sizeof(*lstnew))))
 		return (NULL);
-	i = ft_strlen(s1) + ft_strlen(s2);
-	j = 0;
-	join = NULL;
-	if (!(join = (char*)malloc(sizeof(char) * i + 1)))
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (content == NULL)
 	{
-		join[j++] = s1[i];
-		i++;
+		lstnew->content = NULL;
+		lstnew->content_size = 0;
 	}
-	i = 0;
-	while (s2[i])
+	else
 	{
-		join[j++] = s2[i];
-		i++;
+		if (!(lstnew->content = malloc(content_size)))
+		{
+			free(lstnew);
+			return (NULL);
+		}
+		ft_memcpy(lstnew->content, content, content_size);
+		lstnew->content_size = content_size;
 	}
-	join[j] = '\0';
-	return (join);
+	lstnew->next = NULL;
+	return (lstnew);
 }

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 14:50:55 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/20 15:18:30 by vrobin           ###   ########.fr       */
+/*   Updated: 2018/11/26 14:57:05 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	char	*result;
 
 	i = 0;
-	if (!(result = (char*)malloc(sizeof(char) * ft_strlen(s))))
+	if (s == NULL)
+		return (NULL);
+	if (!(result = (char*)malloc(sizeof(char) * ft_strlen(s) + 1)))
 		return (NULL);
 	if (s == NULL || f == NULL)
 		return (NULL);
@@ -27,5 +29,6 @@ char	*ft_strmap(char const *s, char (*f)(char))
 		result[i] = f(s[i]);
 		i++;
 	}
+	result[i] = '\0';
 	return (result);
 }

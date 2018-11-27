@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 14:02:41 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/21 14:05:11 by vrobin           ###   ########.fr       */
+/*   Updated: 2018/11/26 14:39:01 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	ft_putstr_fd(const char *s, int fd)
 	int i;
 
 	i = 0;
-	while (s[i])
-		ft_putchar_fd(s[i++], fd);
+	if (s != NULL)
+	{
+		while (s[i])
+			ft_putchar_fd(s[i++], fd);
+	}
 }
