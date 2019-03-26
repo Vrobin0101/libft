@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 14:44:16 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/19 14:48:51 by vrobin           ###   ########.fr       */
+/*   Created: 2018/11/19 10:10:20 by spuisais          #+#    #+#             */
+/*   Updated: 2018/11/19 10:23:29 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned int i;
+	size_t i;
 
 	i = 0;
 	while (i < n)

@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 16:56:25 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/20 16:58:44 by spuisais         ###   ########.fr       */
+/*   Created: 2018/11/29 15:28:35 by spuisais          #+#    #+#             */
+/*   Updated: 2019/02/12 13:27:37 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include "libft.h"
+# include <sys/types.h>
+# include <sys/uio.h>
 
-void	ft_putnbr_fd(int n, int fd)
+typedef	struct		s_file
 {
-	unsigned int nbr;
+	int				fd;
+	char			*reste;
+	struct s_file	*next;
+}					t_file;
 
-	if (n < 0)
-	{
-		n *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	nbr = n;
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putnbr_fd(nbr % 10, fd);
-	}
-	else if (nbr <= 9)
-	{
-		ft_putchar_fd(nbr + '0', fd);
-	}
-}
+typedef struct		s_tile
+{
+	int				connections;
+	char			**tile;
+	struct s_tile	*next;
+}					t_tile;
+
+int					get_next_line(const int fd, char **line);
+
+#endif

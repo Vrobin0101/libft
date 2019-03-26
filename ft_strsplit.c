@@ -3,106 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 11:43:02 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/26 14:45:24 by vrobin           ###   ########.fr       */
+/*   Created: 2018/11/20 11:50:40 by spuisais          #+#    #+#             */
+/*   Updated: 2018/11/27 16:02:29 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-static int			ft_count_words(char *str, char c)
+static int		ft_countwords(char const *str, char c)
 {
 	int i;
 	int count;
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
-		if ((str[i] != c) && (str[i] == 0 ||
-					str[i + 1] == c || str[i + 1] == '\0'))
-			count++;
+		if (i == 0)
+			if (str[i] != c)
+				count++;
+		if (str[i] == c)
+			if (str[i + 1] != c)
+				count++;
 		i++;
 	}
 	return (count);
 }
 
-static int			ft_charlen(char *str, char c)
+static int		ft_strlensplit(char const *str, int ind, char c)
 {
 	int i;
-	int cpt;
+	int letters;
+	int index;
 
-	cpt = 0;
 	i = 0;
+	letters = 0;
+	index = 1;
+	while (str[i] != '\0' && index != ind)
+	{
+		if (str[i] != c && str[i + 1] == c)
+			index++;
+		i++;
+	}
 	while (str[i] != '\0')
 	{
 		while (str[i] == c)
 			i++;
-		while (str[i] != c)
-		{
-			i++;
-			cpt++;
-			if (str[i] == '\0')
-				break ;
-		}
-		break ;
-	}
-	return (cpt);
-}
-
-static char			*ft_nolimit(char *str, char c)
-{
-	while (*str == c && *str != '\0')
-		str++;
-	return (str);
-}
-
-static char			*ft_strndup(char *s1, int len)
-{
-	int		i;
-	char	*tab;
-
-	i = 0;
-	tab = NULL;
-	if (!(tab = (char*)malloc(sizeof(char) * len + 1)))
-		return (tab);
-	while (i < len)
-	{
-		tab[i] = s1[i];
+		if (str[i] != c)
+			letters++;
+		if (str[i] != c)
+			if (str[i + 1] == c)
+				return (letters);
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (letters);
 }
 
-char				**ft_strsplit(char const *s, char c)
+static char		**ft_fill_array(char **array, char const *str, char c)
 {
-	int		i;
-	int		nb_char;
-	int		nb_words;
-	char	**tab;
-	char	*str;
+	int i;
+	int j;
+	int k;
 
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	nb_char = 0;
-	str = (char*)s;
-	nb_words = ft_count_words(str, c);
-	tab = NULL;
-	if (!(tab = (char**)malloc(sizeof(*tab) * (nb_words + 1))))
-		return (NULL);
-	while (i < nb_words)
+	k = 0;
+	while (str[i] != '\0')
 	{
-		str = ft_nolimit(str, c);
-		str = str + nb_char;
-		nb_char = ft_charlen(str, c);
-		str = ft_nolimit(str, c);
-		tab[i++] = ft_strndup(str, nb_char);
+		j = 0;
+		if (str[i] == c)
+			i++;
+		else
+		{
+			while (str[i] && str[i] != c)
+			{
+				array[k][j] = str[i];
+				j++;
+				i++;
+			}
+			array[k][j] = '\0';
+			k++;
+		}
 	}
-	tab[i] = NULL;
-	return (tab);
+	array[k] = 0;
+	return (array);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**array;
+	int		k;
+	int		words;
+
+	k = 0;
+	if (!s)
+		return (NULL);
+	words = ft_countwords(s, c);
+	if (!(array = (char**)malloc(sizeof(char*) * (words + 1))))
+		return (NULL);
+	while (k < words)
+	{
+		if (!(array[k] = (char*)malloc(sizeof(char) *
+						(ft_strlensplit(s, k + 1, c) + 1))))
+			return (NULL);
+		k++;
+	}
+	ft_fill_array(array, s, c);
+	return (array);
 }

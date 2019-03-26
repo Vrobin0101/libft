@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 16:56:25 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/20 16:58:44 by spuisais         ###   ########.fr       */
+/*   Created: 2018/12/03 17:12:53 by spuisais          #+#    #+#             */
+/*   Updated: 2018/12/03 17:33:24 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char	*ft_strjoinf(char **s1, char **s2, int k)
 {
-	unsigned int nbr;
+	int		i;
+	char	*str;
 
-	if (n < 0)
+	if (*s1 && *s2)
 	{
-		n *= -1;
-		ft_putchar_fd('-', fd);
+		i = ft_strlen(*s1) + ft_strlen(*s2);
+		if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+			return (NULL);
+		ft_strcpy(str, *s1);
+		ft_strcat(str, *s2);
+		if (k == 1)
+			free(*s1);
+		else if (k == 2)
+			free(*s2);
+		else if (k == 3)
+		{
+			free(*s1);
+			free(*s2);
+		}
+		return (str);
 	}
-	nbr = n;
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putnbr_fd(nbr % 10, fd);
-	}
-	else if (nbr <= 9)
-	{
-		ft_putchar_fd(nbr + '0', fd);
-	}
+	return (NULL);
 }

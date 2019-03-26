@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 16:56:25 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/20 16:58:44 by spuisais         ###   ########.fr       */
+/*   Created: 2019/03/18 16:07:11 by vrobin            #+#    #+#             */
+/*   Updated: 2019/03/18 16:07:14 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	unsigned int nbr;
+	char	*s2;
 
-	if (n < 0)
-	{
-		n *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	nbr = n;
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putnbr_fd(nbr % 10, fd);
-	}
-	else if (nbr <= 9)
-	{
-		ft_putchar_fd(nbr + '0', fd);
-	}
+	if (!(s2 = ft_strnew(ft_strlen(s1))))
+		return (NULL);
+	ft_strncpy(s2, s1, n);
+	return (s2);
 }

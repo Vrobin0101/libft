@@ -5,54 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 11:31:02 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/23 12:41:58 by vrobin           ###   ########.fr       */
+/*   Created: 2019/03/11 11:30:00 by vrobin            #+#    #+#             */
+/*   Updated: 2019/03/18 16:05:48 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void			ft_isnega(int *n, int *nega)
+static int		ft_intlen(long long n)
 {
-	if (*n < 0)
+	long long i;
+
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
 	{
-		*n *= -1;
-		*nega = 1;
-	}
-}
-
-static int			ft_len(int len, int temp)
-{
-	while (temp /= 10)
-		len++;
-	return (len);
-}
-
-char				*ft_itoa(int n)
-{
-	int		len;
-	int		temp;
-	int		nega;
-	char	*str;
-
-	len = 2;
-	temp = n;
-	nega = 0;
-	str = NULL;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	ft_isnega(&n, &nega);
-	len = ft_len(len, temp);
-	len += nega;
-	if (!(str = (char*)malloc(sizeof(char) * len)))
-		return (NULL);
-	str[--len] = '\0';
-	while (len--)
-	{
-		str[len] = 48 + (n % 10);
 		n = n / 10;
+		i++;
 	}
-	if (nega)
+	return (i);
+}
+
+char			*ft_itoa(long long n)
+{
+	char		*str;
+	long long	len;
+	long long	nb;
+
+	len = ft_intlen(n);
+	nb = n;
+	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+		return (0);
+	str[len--] = '\0';
+	if (nb == 0)
+		str[len--] = '0';
+	if (nb < 0)
+	{
+		nb = -nb;
 		str[0] = '-';
+	}
+	while (nb != 0)
+	{
+		str[len--] = (nb % 10 > 9) ? (nb % 10 - 10) : nb % 10 + '0';
+		nb /= 10;
+	}
 	return (str);
 }

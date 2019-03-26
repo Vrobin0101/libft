@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   high_sqrt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 16:56:25 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/20 16:58:44 by spuisais         ###   ########.fr       */
+/*   Created: 2019/03/18 12:26:32 by vrobin            #+#    #+#             */
+/*   Updated: 2019/03/18 12:26:36 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int		ft_high_sqrt(int nb)
 {
-	unsigned int nbr;
+	int i;
 
-	if (n < 0)
+	i = 0;
+	if (nb <= 0)
+		return (0);
+	while (i < 46400 && i <= nb)
 	{
-		n *= -1;
-		ft_putchar_fd('-', fd);
+		if (i * i >= nb)
+			return (i);
+		i++;
 	}
-	nbr = n;
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putnbr_fd(nbr % 10, fd);
-	}
-	else if (nbr <= 9)
-	{
-		ft_putchar_fd(nbr + '0', fd);
-	}
+	return (i);
 }

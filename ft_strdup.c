@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 15:21:38 by vrobin            #+#    #+#             */
-/*   Updated: 2018/11/13 09:19:59 by vrobin           ###   ########.fr       */
+/*   Created: 2018/11/13 11:59:33 by spuisais          #+#    #+#             */
+/*   Updated: 2018/11/19 14:01:41 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s)
 {
-	int		i;
-	char	*tab;
+	int i;
+	char*copy;
 
 	i = 0;
-	tab = NULL;
-	if (!(tab = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1)))
-		return (tab);
-	while (s1[i])
+	while (s[i] != '\0')
+		i++;
+	if (!(copy = malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
 	{
-		tab[i] = s1[i];
+		copy[i] = s[i];
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	copy[i] = '\0';
+	return (copy);
 }
