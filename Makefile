@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+         #
+#    By: vrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/13 15:01:00 by spuisais          #+#    #+#              #
-#    Updated: 2019/03/20 15:12:02 by vrobin           ###   ########.fr        #
+#    Created: 2019/07/28 23:16:23 by vrobin            #+#    #+#              #
+#    Updated: 2019/08/13 00:45:33 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = @gcc
 
-CFLAGS =
+CFLAGS = -Wall -Wextra -Werror
 
 HEADERS = libft.h
 
@@ -81,6 +81,9 @@ SRCS = ft_memset.c		\
 	   ft_high_sqrt.c	\
 	   ft_itoa_base.c	\
 	   ft_fritoa_base.c	\
+	   ft_strskip.c		\
+	   print_until.c	\
+	   ft_llutoa_base.c	\
 
 OBJS = 	$(SRCS:.c=.o)
 

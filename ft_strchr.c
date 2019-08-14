@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:39:46 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/19 11:54:14 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/04/15 14:55:41 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != (char)c)
+	while (*s != (char)c && s)
 		if (!*s++)
 			return (NULL);
 	return ((char*)s);

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 11:30:00 by vrobin            #+#    #+#             */
-/*   Updated: 2019/03/18 16:05:48 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/06/18 00:02:52 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,22 @@ static int		ft_intlen(long long n)
 
 char			*ft_itoa(long long n)
 {
-	char		*str;
-	long long	len;
-	long long	nb;
+	char				*str;
+	long long			len;
+	unsigned long long	nb;
 
 	len = ft_intlen(n);
 	nb = n;
+	if (nb == ULONG_MAX)
+		return (ft_strdup("18446744073709551615"));
 	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
 		return (0);
 	str[len--] = '\0';
 	if (nb == 0)
 		str[len--] = '0';
-	if (nb < 0)
+	if (n < 0)
 	{
-		nb = -nb;
+		nb *= -1;
 		str[0] = '-';
 	}
 	while (nb != 0)

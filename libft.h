@@ -6,13 +6,14 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/03/20 15:10:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/07/08 12:20:03 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <string.h>
 
@@ -22,7 +23,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
@@ -40,11 +40,13 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinf(char **s1, char **s2, int k);
 char				*ft_strtrim(char const *s);
 char				*ft_itoa(long long n);
-char				*ft_litoa(long long n);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa_base(long long value, char *base);
+char				*ft_llutoa_base(unsigned long long value, char *base);
 char				*ft_fritoa_base(long long value, char *base);
 char				*ft_strndup(const char *s1, size_t n);
+char				*ft_strskip(const char *str, char c);
+const char			*print_until(char *format, int *len);
 int					ft_high_sqrt(int nb);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);

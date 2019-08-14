@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_llutoa_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/26 16:23:20 by vrobin            #+#    #+#             */
-/*   Updated: 2019/07/08 12:19:15 by vrobin           ###   ########.fr       */
+/*   Created: 2019/07/08 12:18:40 by vrobin            #+#    #+#             */
+/*   Updated: 2019/07/08 12:20:58 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int				ft_size(unsigned long nbr, int base)
+static int				ft_size(unsigned long long nbr, int base)
 {
 	int size;
 
@@ -25,7 +25,7 @@ static int				ft_size(unsigned long nbr, int base)
 	return (size);
 }
 
-char					*ft_itoa_base(long long value, char *base)
+char					*ft_llutoa_base(unsigned long long value, char *base)
 {
 	char		*str;
 	int			size;

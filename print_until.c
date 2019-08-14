@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   print_until.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/12 02:07:02 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/12 02:07:05 by vrobin           ###   ########.fr       */
+/*   Created: 2019/06/12 05:11:33 by vrobin            #+#    #+#             */
+/*   Updated: 2019/06/12 05:49:28 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalnum(int c)
+const char			*print_until(char *format, int *len)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (format[i] != '\0' && format[i] != '%')
+		i++;
+	if (i > 0)
+		write(1, format, i);
+	*len += i;
+	return ((const char *)format + i);
 }
