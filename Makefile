@@ -6,7 +6,7 @@
 #    By: vrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/28 23:16:23 by vrobin            #+#    #+#              #
-#    Updated: 2019/08/13 00:45:33 by vrobin           ###   ########.fr        #
+#    Updated: 2019/08/15 04:07:00 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ SRCS = ft_memset.c		\
 	   ft_strskip.c		\
 	   print_until.c	\
 	   ft_llutoa_base.c	\
+	   ft_strnjoin.c	\
 
 OBJS = 	$(SRCS:.c=.o)
 
