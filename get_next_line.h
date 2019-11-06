@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 15:28:35 by spuisais          #+#    #+#             */
-/*   Updated: 2019/02/12 13:27:37 by spuisais         ###   ########.fr       */
+/*   Created: 2019/11/06 10:56:58 by vrobin            #+#    #+#             */
+/*   Updated: 2019/11/06 10:57:02 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_tile
 	struct s_tile	*next;
 }					t_tile;
 
+int					check_next(char *str);
 int					get_next_line(const int fd, char **line);
 
 #endif

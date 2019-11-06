@@ -3,19 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/08/15 04:07:49 by vrobin           ###   ########.fr       */
+/*   Created: 2019/11/06 10:57:02 by vrobin            #+#    #+#             */
+/*   Updated: 2019/11/06 10:57:09 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include "get_next_line.h"
 # include <unistd.h>
-# include <limits.h>
 # include <stdlib.h>
 # include <string.h>
+# include <limits.h>
+# include <stdarg.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# define BUFF_SIZE 524
+# define DET detail
+
+typedef struct		s_detail
+{
+	int						strlen;
+	int						sign;
+	int						number;
+	int						field;
+	int						precision;
+	int						zero;
+	int						maj;
+	int						diese;
+	int						oct;
+	int						iflong;
+	int						ifshort;
+	int						minus;
+	int						plus;
+	int						space;
+	int						hexa;
+	int						nega;
+	int						iffloat;
+	int						overbuff;
+	long long unsigned int	len;
+	char					*hexachar;
+}					t_detail;
 
 typedef struct		s_list
 {
@@ -40,9 +71,9 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinf(char **s1, char **s2, int k);
 char				*ft_strtrim(char const *s);
 char				*ft_itoa(long long n);
+char				*ft_litoa(long long n);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa_base(long long value, char *base);
-char				*ft_llutoa_base(unsigned long long value, char *base);
 char				*ft_fritoa_base(long long value, char *base);
 char				*ft_strndup(const char *s1, size_t n);
 char				*ft_strskip(const char *str, char c);
@@ -51,7 +82,7 @@ int					ft_high_sqrt(int nb);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-int					ft_atoi(const char *nptr);
+long int			ft_atoi(const char *nptr);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -91,6 +122,40 @@ void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
+int					ft_printf(const char *format, ...);
+int					bol_nine(char *tmp);
+char				*edit_ret(char *buff, char *string, t_detail *detail);
+char				*edit_point(char *buff, char *string, t_detail *detail);
+char				*point_inf(char *buff, char *string, t_detail *detail);
+char				*point_sup(char **buff, char **string, int *i,
+		t_detail *detail);
+char				*nega(long double *f, long double *rest, long long int *a,
+		t_detail *detail);
+void				clear_buff(char **buff, int *j, t_detail **detail);
+void				edit_precision(char **buff, char **string,
+		t_detail **detail);
+void				parse_format(const char **format, va_list args, int *len);
+void				parse_flag(const char **format, va_list args,
+		t_detail **detail, int *len);
+size_t				aff_char(va_list args, t_detail *detail, char *buff);
+size_t				aff_string(va_list args, t_detail *detail, char *buff);
+size_t				tab_i(va_list args, t_detail *detail, char *buff);
+size_t				aff_pointer(va_list args, t_detail *detail, char *buff);
+size_t				int_conv(va_list args, t_detail *detail, char *buff);
+size_t				uint_conv(va_list args, t_detail *detail, char *buff);
+size_t				octal_conv(va_list args, t_detail *detail, char *buff);
+size_t				hexa_conv(va_list args, t_detail *detail, char *buff);
+size_t				float_conv(va_list args, t_detail *detail, char *buff);
+size_t				bin_conv(va_list args, t_detail *detail, char *buff);
+size_t				percent_conv(va_list args, t_detail *detail, char *buff);
+size_t				get_fct(const char *format, va_list args, t_detail *detail);
+size_t				aff_number(char *buff, char *string, t_detail *detail);
+size_t				ifc_null(char *buff, char *string, t_detail *detail);
+size_t				fix_stuffx(unsigned long long ll, char *buff,
+		t_detail *detail);
+size_t				fix_stuffo(unsigned long long ll, char *buff, t_detail
+		*detail);
+t_detail			*set_det(t_detail *detail);
+char				*ft_llutoa_base(unsigned long long value, char *base);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t n);
-
 #endif

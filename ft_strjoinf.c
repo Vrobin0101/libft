@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoinf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 17:12:53 by spuisais          #+#    #+#             */
-/*   Updated: 2019/05/29 02:49:26 by vrobin           ###   ########.fr       */
+/*   Created: 2019/11/06 10:55:32 by vrobin            #+#    #+#             */
+/*   Updated: 2019/11/06 10:58:58 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_strjoinf(char **s1, char **s2, int k)
 		i = ft_strlen(*s1) + ft_strlen(*s2);
 		if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
 			return (NULL);
+		str[i] = '\0';
 		ft_strcpy(str, *s1);
 		ft_strcat(str, *s2);
 		if (k == 1)

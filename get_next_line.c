@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 11:20:53 by spuisais          #+#    #+#             */
-/*   Updated: 2018/12/04 14:27:54 by spuisais         ###   ########.fr       */
+/*   Created: 2019/11/06 10:56:54 by vrobin            #+#    #+#             */
+/*   Updated: 2019/11/06 10:56:57 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int				error_n(char *str, t_file *filedata, char *buffer)
+{
+	size_t	i;
+	int		cpt;
+
+	i = 0;
+	cpt = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			cpt++;
+		i++;
+	}
+	if (ft_strcmp(buffer, "\n") == 0 || cpt != 0
+			|| str[i - 1] == '\n' || str[i] == '\n')
+		return (1);
+	free(filedata);
+	free(str);
+	free(buffer);
+	return (0);
+}
 
 static	char	*ft_half(char **str)
 {
@@ -51,6 +73,30 @@ static	t_file	*ft_get_file_data(int fd, t_file **head)
 	return (temp);
 }
 
+int				end_gnl(t_file *filedata, char *str, char *buffer, char **line)
+{
+	int i;
+
+	i = 0;
+	if (ft_strcmp(str, "") != 0 && !error_n(str, filedata, buffer))
+		return (-2);
+	filedata->reste = ft_half(&str);
+	*line = ft_strdup(str);
+	i = (ft_strchr(str, '\n') == 0 && (i > 0 || ft_strlen(*line) > 0)) ? 1 : 0;
+	if (check_next(str) == 0)
+	{
+		free(filedata);
+		free(filedata->reste);
+		if (ft_strcmp(buffer, "\n\0") == 0)
+		{
+			free(str);
+			free(buffer);
+			return (-2);
+		}
+	}
+	return (i);
+}
+
 int				get_next_line(int fd, char **line)
 {
 	static t_file	*head;
@@ -67,15 +113,14 @@ int				get_next_line(int fd, char **line)
 		return (-1);
 	while (!(ft_strchr(str, '\n')) && (i = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
+		if (ft_strcmp(buffer, "\n\0") == 0)
+			break ;
 		str = ft_strjoinf(&str, &buffer, 1);
 		ft_bzero(buffer, BUFF_SIZE);
 	}
-	free(buffer);
-	if (i < 0)
-		return (-1);
-	filedata->reste = ft_half(&str);
-	*line = ft_strdup(str);
+	if (end_gnl(filedata, str, buffer, line) == -2)
+		return (-2);
 	free(str);
-	i = (i > 0 || ft_strlen(*line) > 0) ? 1 : 0;
+	free(buffer);
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/11 11:30:00 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 00:02:52 by vrobin           ###   ########.fr       */
+/*   Created: 2019/11/06 10:50:57 by vrobin            #+#    #+#             */
+/*   Updated: 2019/11/06 10:58:20 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ char			*ft_itoa(long long n)
 
 	len = ft_intlen(n);
 	nb = n;
-	if (nb == ULONG_MAX)
-		return (ft_strdup("18446744073709551615"));
 	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
 		return (0);
 	str[len--] = '\0';

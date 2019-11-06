@@ -3,20 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vrobin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: vrobin <vrobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/07/28 23:16:23 by vrobin            #+#    #+#              #
-#    Updated: 2019/08/15 04:07:00 by vrobin           ###   ########.fr        #
+#    Created: 2019/11/06 10:49:12 by vrobin            #+#    #+#              #
+#    Updated: 2019/11/06 11:08:58 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = @gcc
+CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
 HEADERS = libft.h
 
-SRCS = ft_memset.c		\
+OBJ_PATH = obj
+SRC_PATH = .
+
+SOURCES = ft_memset.c		\
 	   ft_bzero.c		\
 	   ft_memcpy.c		\
 	   ft_memccpy.c		\
@@ -81,12 +84,27 @@ SRCS = ft_memset.c		\
 	   ft_high_sqrt.c	\
 	   ft_itoa_base.c	\
 	   ft_fritoa_base.c	\
-	   ft_strskip.c		\
-	   print_until.c	\
-	   ft_llutoa_base.c	\
+	   get_next_line.c \
+	   ft_printf.c    \
+	   parse_format.c \
+	   parse_flag.c   \
+	   number_conv.c  \
+       aff_number.c   \
+	   edit_ret.c     \
+	   csp_conv.c     \
+	   point.c		 \
+	   percent_conv.c \
+	   fill_float.c	 \
+	   check_float.c  \
+	   clear_buff.c	 \
+	   tab_i.c		 \
+	   fix_stuff.c	 \
+	   ft_llutoa_base.c		\
 	   ft_strnjoin.c	\
+	   print_until.c	\
 
-OBJS = 	$(SRCS:.c=.o)
+SRCS = $(addprefix $(SOURCES))
+OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
 NAME = libft.a
 
@@ -95,9 +113,15 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@printf "\033[1;36mLIBFT \033[3;32m[DONE]\033[0m\n" ;
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADERS)
+	@mkdir -p obj
+	@printf "\033[1mCompiling \033[0;36m$(basename $(notdir $@))\033[0m\n" ;
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean :
-	@rm -rf *.o
+	@rm -rf obj
 
 fclean : clean
 	@rm -rf $(NAME)
